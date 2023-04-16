@@ -14,6 +14,12 @@ const config = {
         hostname: 'r4.wallpaperflare.com',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'trumpwallpapers.com',
+        port: '',
+        pathname: '/**'
       }
     ]
   },

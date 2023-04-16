@@ -10,3 +10,24 @@ export const colors = {
 export const colorList = [
   colors.red, colors.orange, colors.blue
 ]
+
+export const MockArticles = [
+  {
+    id: '1',
+    title: 'Article 1',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
+    image: 'https://trumpwallpapers.com/wp-content/uploads/Golf-Wallpaper-10-1920x1200-1.jpg'
+  },
+  {
+    id: '2',
+    title: 'Article 2',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
+    image: 'https://trumpwallpapers.com/wp-content/uploads/Golf-Wallpaper-10-1920x1200-1.jpg'
+  },
+  {
+    id: '3',
+    title: 'Article 3',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
+    image: 'https://trumpwallpapers.com/wp-content/uploads/Golf-Wallpaper-10-1920x1200-1.jpg'
+  },
+]

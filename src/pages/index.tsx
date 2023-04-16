@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { colorList, colors } from "~/styles/constants";
+import Image from "next/image";
+import { MockArticles, colorList, colors } from "~/styles/constants";
 
 const Home: NextPage = () => {
-
   return (
     <>
       <Head>
@@ -13,6 +13,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col gap-12">
         <FeaturedSection />
+        <Articles />
         <SubscribeSection />
       </main>
     </>
@@ -24,46 +25,25 @@ export default Home;
 export function FeaturedSection() {
   return (
       <div className='flex flex-col gap-12'>
-        <div className='flex items-end bg-[url("https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg")] h-[50vh] bg-cover'>
+        <div className='flex items-end bg-[url("https://trumpwallpapers.com/wp-content/uploads/Golf-Wallpaper-10-1920x1200-1.jpg")] h-[50vh] bg-cover'>
           <div className='w-full px-10 py-6'>
-            <div style={{ background: colors.red}} className='w-[100px] text-white px-3 py-1'>Category</div>
+            <div style={{ background: colors.red}} className='w-[100px] text-white px-3 py-1 mb-3'>Category</div>
             <h1 className='font-bold text-white'>This is a mock title for an article</h1>
             <p className='text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
           </div>  
         </div>
-        <Articles />
+        <FeaturedArticles />
       </div>
   )
 }
 
-export function Articles() {
-  const MockArticles = [
-    {
-      id: '1',
-      title: 'Article 1',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
-      image: 'https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg'
-    },
-    {
-      id: '2',
-      title: 'Article 2',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
-      image: 'https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg'
-    },
-    {
-      id: '3',
-      title: 'Article 3',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
-      image: 'https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg'
-    },
-  ]
-
+export function FeaturedArticles() {
   return (
-    <div className='h-[300px] flex px-10 justify-between'>
-      <div className='flex justify-between w-[66%]'>
+    <div className='flex px-10 justify-between flex-col md:flex-row gap-12'>
+      <div className='flex justify-between w-full md:w-[66%] flex-col md:flex-row gap-6'>
         {MockArticles.map((article, i) => {
           return (
-            <div key={article.id} className='w-[30%]'>
+            <div key={article.id} className='w-full md:w-[30%]'>
               <div className='text-white px-3 py-1 mb-1 max-w-[100px]' style={{ background: colorList[i]}}>Category</div>
               <h1 className='text-lg font-bold'>{article.title}</h1>
               <p>{article.description}</p>
@@ -72,13 +52,35 @@ export function Articles() {
         })}
       </div>
       <div className='bg-black w-[33%]'>
-
+        here
       </div>
     </div>
   )
 }
 
-export function SubscribeSection() {
+function Articles() {
+  return (
+    <div className='mx-10'>
+      {MockArticles.map(article => (
+        <div className='flex py-6 border-t-4 border-black justify-between' key={article.id}>
+          <h1 className='text-black font-bold text-3xl'>{article.title}</h1>
+          <div className='flex gap-6'>
+            <div className='flex flex-col w-[450px] h-full gap-6'>
+              <div>
+                <h1 className='font-bold text-lg'>{article.title}</h1>
+                <p>{article.description}</p>
+              </div>
+              <button className='py-2 self-start text-black font-bold >'>Read more</button>
+            </div>
+            <Image src={article.image} width={500} height={500} alt='article image'/>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function SubscribeSection() {
   return (
     <div className='bg-black w-full flex flex-col py-16 items-center'>
       <h1 className='text-white text-center w-full font-bold text-3xl'>Subscribe to Bogey Blaine</h1>
