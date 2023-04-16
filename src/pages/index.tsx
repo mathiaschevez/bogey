@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { colorList, colors } from "~/styles/constants";
 
 const Home: NextPage = () => {
@@ -14,7 +13,6 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col gap-12">
         <FeaturedSection />
-        <Articles />
         <SubscribeSection />
       </main>
     </>
@@ -25,9 +23,16 @@ export default Home;
 
 export function FeaturedSection() {
   return (
-    <div className='flex justify-center border-black max-h-[700px] overflow-hidden'>
-      <Image className="object-fill" alt='Golf Image' src='https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg' height={700} width={2000} />
-    </div>
+      <div className='flex flex-col gap-12'>
+        <div className='flex items-end bg-[url("https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg")] h-[50vh] bg-cover'>
+          <div className='h-32 w-full px-10'>\
+            <div style={{ background: colors.red}} className='w-[100px] text-white px-3 py-1'>Category</div>
+            <h1 className='font-bold text-white'>This is a mock title for an article</h1>
+            <p className='text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+          </div>  
+        </div>
+        <Articles />
+      </div>
   )
 }
 
@@ -54,16 +59,21 @@ export function Articles() {
   ]
 
   return (
-    <div className='w-full h-[300px] flex px-10 justify-between'>
-      {MockArticles.map((article, i) => {
-        return (
-          <div key={article.id} className='w-[30%]'>
-            <div className='text-white px-3 py-1 mb-1 max-w-[100px]' style={{ background: colorList[i]}}>Category</div>
-            <h1 className='text-lg font-bold'>{article.title}</h1>
-            <p>{article.description}</p>
-          </div>
-        )
-      })}
+    <div className='h-[300px] flex px-10 justify-between'>
+      <div className='flex justify-between w-[66%]'>
+        {MockArticles.map((article, i) => {
+          return (
+            <div key={article.id} className='w-[30%]'>
+              <div className='text-white px-3 py-1 mb-1 max-w-[100px]' style={{ background: colorList[i]}}>Category</div>
+              <h1 className='text-lg font-bold'>{article.title}</h1>
+              <p>{article.description}</p>
+            </div>
+          )
+        })}
+      </div>
+      <div className='bg-black w-[33%]'>
+
+      </div>
     </div>
   )
 }
