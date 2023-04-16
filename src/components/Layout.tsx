@@ -28,7 +28,7 @@ export default Layout
 
 function Navbar() {
   return (
-    <div className='flex justify-between w-full p-3 items-center'>
+    <div className='flex justify-between w-full p-3 items-center bg-[#f4e6d9]'>
       <h1 className='font-bold'>Logo</h1>
       <button
         className="rounded-full bg-black px-6 py-1.5 font-semibold text-white no-underline transition hover:bg-black/80"
