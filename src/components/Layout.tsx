@@ -8,7 +8,7 @@ export function Layout({ children }: { children: JSX.Element }) {
 
   return (
     sessionData?.user ? 
-      <div className='flex flex-col'>
+      <div className='flex flex-col  bg-[#f4e6d9]'>
         <Navbar />
         {children}
         <Footer />
