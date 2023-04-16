@@ -25,7 +25,7 @@ export function FeaturedSection() {
   return (
       <div className='flex flex-col gap-12'>
         <div className='flex items-end bg-[url("https://r4.wallpaperflare.com/wallpaper/553/206/435/nature-landscape-trees-grass-wallpaper-2b365c1d83a17fe9d5441bd94dcc9ca0.jpg")] h-[50vh] bg-cover'>
-          <div className='h-32 w-full px-10'>\
+          <div className='w-full px-10 py-6'>
             <div style={{ background: colors.red}} className='w-[100px] text-white px-3 py-1'>Category</div>
             <h1 className='font-bold text-white'>This is a mock title for an article</h1>
             <p className='text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
@@ -80,7 +80,14 @@ export function Articles() {
 
 export function SubscribeSection() {
   return (
-    <div className='bg-black w-full h-[300px]'></div>
+    <div className='bg-black w-full flex flex-col py-16 items-center'>
+      <h1 className='text-white text-center w-full font-bold text-3xl'>Subscribe to Bogey Blaine</h1>
+      <h1 className='w-full text-center mt-3 mb-9 text-white'>Some text here to really hook the user</h1>
+      <div className="w-full flex items-center justify-center">
+        <input className='bg-transparent border w-[50%] px-3 py-2' type="text" placeholder='Enter your email address' />
+        <button className='bg-white border text-black px-3 py-2'>Subscribe</button>
+      </div>
+    </div>
   )
 }
 
