@@ -70,7 +70,7 @@ function Articles() {
                 <h1 className='font-bold text-lg'>{article.title}</h1>
                 <p>{article.description}</p>
               </div>
-              <button className='py-2 self-start text-black font-bold >'>Read more</button>
+              <button className='py-2 self-start text-black font-bold'>Read more</button>
             </div>
             <Image src={article.image} width={500} height={500} alt='article image'/>
           </div>
