@@ -4,10 +4,12 @@ import { api } from '~/utils/api'
 import Link from 'next/link'
 
 export function Layout({ children }: { children: JSX.Element }) {
-  const { data: sessionData } = useSession()
+  const { data: sessionData, status } = useSession()
   console.log(sessionData)
 
   return (
+    status === 'loading' ? 
+      <div className='min-h-screen w-screen bg-[#f4e6d9]'>Loading...</div> :
     sessionData?.user ? 
       <div className='flex flex-col  bg-[#f4e6d9]'>
         <Navbar />
@@ -51,7 +53,9 @@ function Navbar() {
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div className='h-32'>
+      Footer
+    </div>
   )
 }
 
