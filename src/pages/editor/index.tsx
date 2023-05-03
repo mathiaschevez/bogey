@@ -5,6 +5,7 @@ import { createEditor } from 'slate'
 
 // Import the Slate components and React plugin.
 import { Slate, Editable, withReact } from 'slate-react'
+import { api } from '~/utils/api'
 
 const initialValue = [
   {
@@ -16,6 +17,8 @@ const initialValue = [
 const Editor = () => {
   const [editor] = useState(() => withReact(createEditor()))
   console.log(editor)
+  const articleCreation = api.article.createArticle.useMutation()
+
 
   return (
     <>
@@ -25,11 +28,12 @@ const Editor = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col gap-12 p-6">
-        <div className='border-2 border-white h-[600px]'>
+        <div className='border-2 border-black rounded p-3 h-[600px] bg-white'>
           <Slate editor={editor} value={initialValue}>
             <Editable
               onKeyDown={event => {
                 console.log(event.key)
+                console.log(editor.children)
               }}
             />
           </Slate>

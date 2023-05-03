@@ -34,6 +34,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@unique([userId])
 }
 
 model Session {
@@ -42,6 +43,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
 }
 
 model User {
@@ -52,6 +55,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  articles      Article[]
 }
 
 model VerificationToken {
@@ -60,4 +64,16 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Article {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  content   String
+  editor    User     @relation(fields: [id], references: [id])
+  image     String?
+
+  @@unique([id])
 }

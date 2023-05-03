@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { MockArticles, colorList, colors } from "~/styles/constants";
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
@@ -30,7 +31,7 @@ export function FeaturedSection() {
           <div className='w-full px-10 py-6'>
             <div style={{ background: colors.red}} className='w-[100px] text-white px-3 py-1 mb-3'>Category</div>
             <h1 className='font-bold text-white'>This is a mock title for an article</h1>
-            <p className='text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+            <p className='text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. </p>
           </div>  
         </div>
         <FeaturedArticles />
@@ -44,11 +45,11 @@ export function FeaturedArticles() {
       <div className='flex justify-between w-full md:w-[66%] flex-col md:flex-row gap-6'>
         {MockArticles.map((article, i) => {
           return (
-            <div key={article.id} className='w-full md:w-[30%]'>
+            <Link href={`/article/${article.id}`} key={article.id} className='w-full md:w-[30%] h-48'>
               <div className='text-white px-3 py-1 mb-1 max-w-[100px]' style={{ background: colorList[i]}}>Category</div>
               <h1 className='text-lg font-bold'>{article.title}</h1>
               <p>{article.description}</p>
-            </div>
+            </Link>
           )
         })}
       </div>
@@ -71,7 +72,7 @@ function Articles() {
                 <h1 className='font-bold text-lg'>{article.title}</h1>
                 <p>{article.description}</p>
               </div>
-              <button className='py-2 self-start text-black font-bold'>Read more</button>
+              <Link href={`/article/${article.id}`} className='py-2 self-start text-black font-bold'>Read more</Link>
             </div>
             <Image src={article.image} width={500} height={500} alt='article image'/>
           </div>
