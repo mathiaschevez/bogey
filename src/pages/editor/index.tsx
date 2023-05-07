@@ -31,6 +31,7 @@ const Editor = () => {
         <div className='border-2 border-black rounded p-3 h-[600px] bg-white'>
           <Slate editor={editor} value={initialValue}>
             <Editable
+              className='h-full'
               onKeyDown={event => {
                 console.log(event.key)
                 console.log(editor.children)
