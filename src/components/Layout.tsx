@@ -11,12 +11,12 @@ export function Layout({ children }: { children: JSX.Element }) {
     status === 'loading' ? 
       <div className='min-h-screen w-screen bg-[#f4e6d9]'>Loading...</div> :
     sessionData?.user ? 
-      <div className='flex flex-col  bg-[#f4e6d9]'>
+      <div className='flex flex-col bg-[#f4e6d9] min-h-screen'>
         <Navbar />
         {children}
         <Footer />
       </div> :
-       <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 bg-[#f4e6d9] w-full min-h-screen">
+      <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 bg-[#f4e6d9] w-full min-h-screen">
         <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           <span className='text-black'>Bogey Blaine</span>
         </h1>
@@ -37,7 +37,7 @@ function Navbar() {
       <Link href='/' className='font-bold'>Logo</Link>
       <div className='flex items-center gap-6'>
         { sessionData?.user.email === 'blainetchambers@gmail.com' || sessionData?.user.email === 'davidchevez90@gmail.com' &&
-          <Link href='/editor'>
+          <Link href='/documentEditor'>
             <div className='text-black border-2 border-black py-1 px-3 rounded font-bold hover:bg-black hover:text-white'>Editor</div>
           </Link>
         }

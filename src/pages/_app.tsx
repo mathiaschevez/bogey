@@ -6,18 +6,24 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import Layout from "~/components/Layout";
+import { ConfigProvider } from "antd";
 
-const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
+const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ConfigProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ConfigProvider>
     </SessionProvider>
   );
 };
+
+const theme = {
+  token: {
+    colorPrimary: 'black',
+  }
+}
 
 export default api.withTRPC(MyApp);

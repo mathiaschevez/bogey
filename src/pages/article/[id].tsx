@@ -7,7 +7,7 @@ const ArticleDetail = () => {
   const { id } = router.query
 
   return (
-    <div>
+    <div className='flex-1'>
       Article
     </div>
   )
