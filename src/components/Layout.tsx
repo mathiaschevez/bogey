@@ -53,7 +53,7 @@ function Navbar() {
 
 function Footer() {
   return (
-    <div className='h-32'>
+    <div className='h-32 border border-t-black'>
       Footer
     </div>
   )
