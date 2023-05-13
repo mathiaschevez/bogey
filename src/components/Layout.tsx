@@ -2,10 +2,10 @@ import React from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { api } from '~/utils/api'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export function Layout({ children }: { children: JSX.Element }) {
   const { data: sessionData, status } = useSession()
-  console.log(sessionData)
 
   return (
     status === 'loading' ? 
@@ -31,9 +31,10 @@ export default Layout
 
 function Navbar() {
   const { data: sessionData } = useSession()
+  const router = useRouter().pathname
 
   return (
-    <div className='flex justify-between w-full p-3 items-center bg-[#f4e6d9]'>
+    <div className={`${router === '/documentEditor' ? 'border-b-black border' : ''} flex justify-between w-full p-3 items-center bg-[#f4e6d9] h-16 z-50`}>
       <Link href='/' className='font-bold'>Logo</Link>
       <div className='flex items-center gap-6'>
         { sessionData?.user.email === 'blainetchambers@gmail.com' || sessionData?.user.email === 'davidchevez90@gmail.com' &&
@@ -53,7 +54,7 @@ function Navbar() {
 
 function Footer() {
   return (
-    <div className='h-32 border border-t-black'>
+    <div className='h-32 border border-t-black z-50 bg-[#f4e6d9]'>
       Footer
     </div>
   )
