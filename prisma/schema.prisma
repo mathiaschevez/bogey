@@ -76,5 +76,6 @@ model Paragraph {
   updatedAt DateTime @updatedAt
   content   String
   articleId String
-  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  Article Article @relation(fields: [articleId], references: [id])
 }
