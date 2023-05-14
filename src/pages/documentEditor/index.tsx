@@ -101,7 +101,7 @@ const DocumentEditor = () => {
           onCancel={() => setSavedArticlesModalOpen(false)}
         >
           <div className='flex flex-col justify-center items-center'>
-            {userArticles.data && userArticles.data.map(article => (
+            {userArticles.data?.map(article => (
               <div 
                 key={article.id}
                 className={`border border-slate-400 p-3 w-full cursor-pointer hover:border-blue-600 ${selectedSavedArticle?.id === article.id ? 'border-blue-600' : ''}`}

@@ -30,7 +30,7 @@ export const articleRouter = createTRPCRouter({
           include: { paragraphs: true }
         })
 
-        return articles
+        return articles as ArticleResponse[]
       } catch (error) {
         console.log(error)
         return null
