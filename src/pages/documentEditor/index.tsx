@@ -1,5 +1,4 @@
 import { Button, Input, Modal } from "antd";
-import { type Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import Head from "next/head"
 import { useState } from "react";
@@ -9,6 +8,7 @@ import { api } from "~/utils/api"
 
 const DocumentEditor = () => {
   const { data: sessionData } = useSession()
+  const userArticles = api.article.getUserArticles.useQuery({ userId: sessionData?.user.id ?? ''})
 
   const saveArticle = api.article.saveParagraph.useMutation()
   const publishArticle = api.article.publishArticle.useMutation()
@@ -18,6 +18,7 @@ const DocumentEditor = () => {
   const [textAreaValue, setTextAreaValue] = useState<string>('')
 
   const [currentArticle, setCurrentArticle] = useState<ArticleResponse | null>(null)
+  const [selectedSavedArticle, setSelectedSavedArticle] = useState<ArticleResponse | null>(null)
 
   const handleSaveParagraph = async () => {
     try {
@@ -57,6 +58,15 @@ const DocumentEditor = () => {
     }
   }
 
+  const handleLoadArticle = () => {
+    if (!selectedSavedArticle) return
+
+    setArticleTitle(selectedSavedArticle.title)
+    setTextAreaValue(selectedSavedArticle.paragraphs[0]?.content ?? '')
+
+    setSavedArticlesModalOpen(false)
+  }
+
   return (
     <>
       <Head>
@@ -66,7 +76,7 @@ const DocumentEditor = () => {
       </Head>
       <>
         <div className='flex-1 flex items-center'>
-          <SidePanel sessionData={sessionData} setSavedArticlesModalOpen={setSavedArticlesModalOpen} />
+          <SidePanel setSavedArticlesModalOpen={setSavedArticlesModalOpen} />
           <div className={`flex flex-col flex-1 ml-60`}>
             <ContentCreation
               currentArticle={currentArticle}
@@ -84,9 +94,23 @@ const DocumentEditor = () => {
         <Modal
           title='Saved Articles' 
           open={savedArticlesModalOpen}
+          footer={[
+            <Button key='cancel'>Cancel</Button>,
+            <Button key='load' disabled={!selectedSavedArticle} onClick={() => handleLoadArticle()}>Load</Button>
+          ]}
           onCancel={() => setSavedArticlesModalOpen(false)}
         >
-          <>here</>
+          <div className='flex flex-col justify-center items-center'>
+            {userArticles.data && userArticles.data.map(article => (
+              <div 
+                key={article.id}
+                className={`border border-slate-400 p-3 w-full cursor-pointer hover:border-blue-600 ${selectedSavedArticle?.id === article.id ? 'border-blue-600' : ''}`}
+                onClick={() => setSelectedSavedArticle(article)}
+              >
+                <>{article.title}</>
+              </div>
+            ))}
+          </div>
         </Modal>
       </>
     </>
@@ -95,8 +119,7 @@ const DocumentEditor = () => {
 
 export default DocumentEditor
 
-const SidePanel = ({ sessionData, setSavedArticlesModalOpen }: { sessionData: Session | null, setSavedArticlesModalOpen: (_: boolean) => void }) => {
-  // const userArticles = api.article.getUserArticles.useQuery({ userId: sessionData?.user.id ?? ''})
+const SidePanel = ({ setSavedArticlesModalOpen }: { setSavedArticlesModalOpen: (_: boolean) => void }) => {
 
   return (
     <div className='fixed flex flex-col px-3 gap-6 h-full mt-16 pt-20 z-10'>

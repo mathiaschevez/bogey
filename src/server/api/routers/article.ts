@@ -13,25 +13,27 @@ export interface ArticleResponse {
   title: string
   updatedAt: Date
   userId: string
+  paragraphs: {
+    content: string
+  }[]
 }
 
 export const articleRouter = createTRPCRouter({
   getUserArticles: publicProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
-      if (!input.userId) return 'Error'
+      if (!input.userId) return null
 
       try {
         const articles = await ctx.prisma.article.findMany({
-          where: {
-            userId: input.userId
-          }
+          where: { userId: input.userId },
+          include: { paragraphs: true }
         })
 
         return articles
       } catch (error) {
         console.log(error)
-        return 'Error'
+        return null
       }
     }),
 
